@@ -1,9 +1,34 @@
+global:
+  scrape_interval:     15s # By default, scrape targets every 15 seconds.
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+    monitor: 'railway-prom'
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
 scrape_configs:
-  - job_name: tensor-automaker.railway.internal
-    metrics_path: /metrics
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # Override the global default and scrape targets from this job every 5 seconds.
+    scrape_interval: 5s
+
     static_configs:
-      # Replace the port with the port your /metrics endpoint is running on
+      - targets: ['localhost:9090']
+  
+  - job_name: 'tensor-automaker.railway.internal'
+    scrape_interval: 5s
+    static_configs:
       - targets: ['tensor-automaker.railway.internal:5817']
-    # For a real deployment, you would want the scrape interval to be
-    # longer but for testing, you want the data to show up quickly
-    scrape_interval: 200ms
+
+  # - job_name: 'postgres'
+  #   scrape_interval: 5s
+  #   static_configs:
+  #     - targets: ['localhost:9187']
+
+  # - job_name: 'mysql'
+  #   scrape_interval: 5s
+  #   static_configs:
+  #     - targets: ['localhost:9104']
