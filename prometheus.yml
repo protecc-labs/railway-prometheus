@@ -18,10 +18,10 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
   
-  - job_name: 'demo_application'
+  - job_name: 'tensor-automaker'
     scrape_interval: 5s
     static_configs:
-      - targets: ['demo.do.prometheus.io:9090']
+      - targets: ['tensor-automaker.railway.internal:5817']
 
   # - job_name: 'postgres'
   #   scrape_interval: 5s
