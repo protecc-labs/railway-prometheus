@@ -21,7 +21,7 @@ scrape_configs:
   - job_name: 'tensor-automaker.railway.internal'
     scrape_interval: 5s
     static_configs:
-      - targets: ['railway-prometheus-production-0620.up.railway.app:9090']
+      - targets: ['grafana-production-f3e7.up.railway.app']
 
   # - job_name: 'postgres'
   #   scrape_interval: 5s
